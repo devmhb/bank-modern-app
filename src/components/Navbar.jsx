@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import {close, logo, menu} from '../assets'
 import {navLinks} from "../constanse"
+import {motion} from "framer-motion"
 
 
 const Navbar = () => {
@@ -9,18 +10,22 @@ const Navbar = () => {
 
   return (
     <nav className='w-full flex py-6 justify-between items-center navbar'>
-      <img src={logo} alt="hoobank" className='w-[124px] h-[32px] cursor-pointer'/>\
+      <motion.img whileHover={{scale:1.1}} transition={{ease: "easeIn", duration:0.5}} src={logo} alt="hoobank" className='w-[124px] h-[32px] cursor-pointer'/>\
 
       <ul className='list-none sm:flex hidden justify-end items-center flex-1'>
         {navLinks.map((nav, index) => (
-          <li
+          <motion.li
+            whileHover={{scale:1.1, color:"#33bbcf", textShadow: "5px 3px 5px rgba(34,31,222,0.76)"}}
+            whileTap={{scale:0.7}}
+            transition={{ ease: "easeOut", duration: 0.3}}
+            
             key={nav.id}
             className={`font-poppins font-normal cursor-pointer text-white text-[16px] ${index === navLinks.length -1 ? 'mr-0' : 'mr-10'} `}
           >
             <a href={`#${nav.id}`}>
               {nav.title}
             </a>
-          </li>
+          </motion.li>
         ))}
       </ul>
 
