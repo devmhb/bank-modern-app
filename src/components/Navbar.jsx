@@ -4,6 +4,20 @@ import {close, logo, menu} from '../assets'
 import {navLinks} from "../constanse"
 import {motion} from "framer-motion"
 
+const variants = {
+  hidden: {
+    opacity:0,
+    y:-100
+  },
+  visible: {
+    opacity:1,
+    y: 0,
+    transition: {
+      type: "spring",
+      delay: 0.5
+    }
+  }
+}
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
@@ -12,7 +26,7 @@ const Navbar = () => {
     <nav className='w-full flex py-6 justify-between items-center navbar'>
       <motion.img whileHover={{scale:1.1}} transition={{ease: "easeIn", duration:0.5}} src={logo} alt="hoobank" className='w-[124px] h-[32px] cursor-pointer'/>\
 
-      <ul className='list-none sm:flex hidden justify-end items-center flex-1'>
+      <motion.ul variants={variants} initial="hidden" animate="visible" className='list-none sm:flex hidden justify-end items-center flex-1'>
         {navLinks.map((nav, index) => (
           <motion.li
             whileHover={{scale:1.1, color:"#33bbcf", textShadow: "5px 3px 5px rgba(34,31,222,0.76)"}}
@@ -27,7 +41,7 @@ const Navbar = () => {
             </a>
           </motion.li>
         ))}
-      </ul>
+      </motion.ul>
 
       <div className='sm:hidden flex flex-1 justify-end items-center cursor-pointer'>
             <img src={toggle ? close : menu} alt="menu"  className='w-[25px] h-[25px] object-contain'

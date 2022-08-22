@@ -1,6 +1,7 @@
 import { features } from "../constanse";
 import styles, { layout } from "../style";
 import Button from "./Button";
+import {motion} from "framer-motion"
 
 const FeatureCard = ({ icon, title, content, index }) => (
   <div className={`flex flex-row p-6 rounded-[20px] ${index !== features.length - 1 ? "mb-6" : "mb-0"} feature-card`}>
@@ -18,8 +19,27 @@ const FeatureCard = ({ icon, title, content, index }) => (
   </div>
 );
 
+const variant = {
+  hidden: {
+    opacity: 0,
+    y:100
+  },
+  visible: {
+    opacity: 1,
+    y:0,
+    transition: {
+      type: "spring",
+      delay:0.2,
+      duration:1
+    }
+  }
+}
 const Business = () =>  (
-  <section id="features" className={layout.section}>
+  <motion.section 
+  variants={variant}
+  initial="hidden"
+  whileInView="visible"
+  id="features" className={layout.section}>
     <div className={layout.sectionInfo}>
       <h2 className={styles.heading2}>
         You do the business, <br className="sm:block hidden" /> we’ll handle
@@ -39,7 +59,7 @@ const Business = () =>  (
         <FeatureCard key={feature.id} {...feature} index={index} />
       ))}
     </div>
-  </section>
+  </motion.section>
 );
 
 export default Business;

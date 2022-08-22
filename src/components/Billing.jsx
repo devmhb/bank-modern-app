@@ -1,8 +1,31 @@
 import { apple, bill, google } from "../assets";
 import styles, { layout } from "../style";
+import {motion} from "framer-motion"
+
+const variant = {
+  hidden: {
+    opacity: 0,
+    y:100
+  },
+  visible: {
+    opacity: 1,
+    y:0,
+    transition: {
+      type: "spring",
+      delay:0.2,
+      duration:0.5
+    }
+  }
+}
+
+
 
 const Billing = () => (
-  <section id="product" className={layout.sectionReverse}>
+  <motion.section 
+  variants={variant}
+  initial="hidden"
+  whileInView="visible"
+  id="product" className={layout.sectionReverse}>
     <div className={layout.sectionImgReverse}>
       <img src={bill} alt="billing" className="w-[100%] h-[100%] relative z-[5]" />
 
@@ -28,7 +51,7 @@ const Billing = () => (
         <img src={google} alt="google_play" className="w-[144.17px] h-[43.08px] object-contain cursor-pointer" />
       </div>
     </div>
-  </section>
+  </motion.section>
 );
 
 export default Billing;
